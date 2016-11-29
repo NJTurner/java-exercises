@@ -2,77 +2,38 @@
  * Created by NicholasTurner on 11/21/16.
  */
 
+import java.io.PrintStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.stream.*;
+
+//procedural
+//as a series of steps towards a goal (output)
+
+//00 code
+//has layers
+//* Input
+//* Output
+//* Logic for the batters
+
+//cohesion
 
 //luis code
 public class BattingStats {
     public static void main(String[] args) {
         int numberAtBats;
-        int[] atBats;//declaring a variable
-        String anotherBatter;
-        Scanner scanner = new Scanner(System.in);
-
+        PlayerConsole console = new PlayerConsole(new Scanner(System.in), System.out);
         do {
-            System.out.println("Enter the number of at-bats:");
-            numberAtBats = scanner.nextInt();
+            numberAtBats = console.getNumberAtBats();
+            Player player = new Player(new int[numberAtBats]);
 
-            atBats = new int[numberAtBats];
+            console.getAtBatsInformation(player, numberAtBats);
 
-            for (int i = 0; i < atBats.length; i++) {
-                System.out.println("How many bases did the player earn up at bat this time?");
-                atBats[i] = getBasesEarned(scanner);
-            }
-
-            double battingAverage = calculateBattingAverage(atBats);
-            double sluggingAverage = calculateSluggingAverage(atBats);
-
-            System.out.printf("Batting Average: %.3f, Slugging Average : %.3f\n",
-                    battingAverage,
-                    sluggingAverage
+            console.showPlayerSummary(
+                    player.battingAverage(),
+                    player.sluggingAverage()
             );
-            anotherBatter = getAnotherBatter(scanner);
-        } while ("y".equalsIgnoreCase(anotherBatter));
-    }
 
-    private static double calculateSluggingAverage(int[] atBats) {
-        double sumOfBases;
-        sumOfBases = 0;
-        for (int numberOfBases : atBats) {
-            sumOfBases += numberOfBases;
-        }
-        return sumOfBases / atBats.length;
-    }
-
-    private static double calculateBattingAverage(int[] atBats) {
-        double sumOfBases = 0;
-        for (int numberOfBases : atBats) {
-            if (numberOfBases > 0) {
-                sumOfBases++;
-            }
-        }
-        return sumOfBases / atBats.length;
-    }
-
-    private static String getAnotherBatter(Scanner scanner) {
-        System.out.println("Another Batter? (y/n)");
-        String anotherBatter = scanner.next();
-        return anotherBatter;
-    }
-
-    private static int getBasesEarned(Scanner scanner) {
-        try {
-            int bases = scanner.nextInt();
-            if (bases < 0 || bases > 4) {
-                System.out.println("Please enter a number between 0 and 4");
-                return getBasesEarned(scanner);
-            }
-            return bases;
-        } catch (InputMismatchException e) {
-            System.out.println("Please enter a number");
-            return getBasesEarned(scanner);
-        }
+        } while ("y".equalsIgnoreCase(console.getAnotherBatter()));
     }
 
     //my code
