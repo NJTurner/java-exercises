@@ -1,41 +1,39 @@
 package circles;
 
-/**
- * Created by NicholasTurner on 11/30/16.
- */
+import java.text.DecimalFormat;
+
 public class Circle {
-    private final double PI = Math.PI;
     private double radius;
+    private static int numberOfCirclesProduced = 0;
 
-    public Circle() {
-        radius = 0.0;
+    public Circle(double radius) {
+        this.radius = radius;
+        numberOfCirclesProduced++;
     }
 
-    public Circle(double r) {
-        radius = r;
+    public double getCircumference() {
+        return 2 * Math.PI * radius;
     }
 
-    public double calculateCircumference() {
-        return 2 * PI * radius;
+    public double getArea() {
+        return Math.PI * radius * radius;
     }
 
-//    public String calculateFormattedCircumference(){
-//
-//    }
-
-    public double calculateArea() {
-        return PI * Math.pow(radius, 2);
+    public static int getNumberOfCirclesProduced() {
+        return numberOfCirclesProduced;
     }
 
-//    public String calculateFormattedArea(){
-//
-//    }
+    public String getFormattedCircumference() {
+        return formatNumber(getCircumference());
+    }
 
-//    private String formatNumber(double x){
-//
-//    }
-//
-//    public static int calculateObjectCount(){
-//
-//    }
+    public String getFormattedArea() {
+        return formatNumber(getArea());
+    }
+
+    private String formatNumber(double number) {
+        DecimalFormat formatter = new DecimalFormat("#.###");
+        return formatter.format(number);
+    }
+
 }

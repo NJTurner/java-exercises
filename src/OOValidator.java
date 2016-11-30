@@ -16,15 +16,15 @@ public class OOValidator {
         }
     }
 
-    public int getIntWithinRange(String prompt, int min, int max) {
-        int userInput = getInt(prompt);
-        try{
-            if(userInput < min || userInput > max) {
-                throw new InputMismatchException();
-            }
-            return userInput;
-        }catch (InputMismatchException e) {
-            return getIntWithinRange(prompt, min, max);
-        }
-    }
+//    public int getIntWithinRange(String prompt, int min, int max) {
+//        int userInput = getInt(prompt);
+//        try{
+//            if(userInput < min || userInput > max) {
+//                throw new InputMismatchException();
+//            }
+//            return userInput;
+//        }catch (InputMismatchException e) {
+//            return getIntWithinRange(prompt, min, max);
+//        }
+//    }
 }
