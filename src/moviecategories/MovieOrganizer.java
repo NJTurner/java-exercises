@@ -1,8 +1,5 @@
 package moviecategories;
 
-/**
- * Created by NicholasTurner on 11/30/16.
- */
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,10 +8,10 @@ public class MovieOrganizer {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        String choice = "";
-        String name = "";
+        String choice;
+        String name;
         boolean run = true;
-        ArrayList<Movies> list = new ArrayList<Movies>();
+        ArrayList<Movies> list = new ArrayList<>();
 
         list.add(new Movies("Star Wars", "Science Fiction"));
         list.add(new Movies("Arrival", "Science Fiction"));
@@ -35,9 +32,9 @@ public class MovieOrganizer {
                     + "(select \"Science Fiction\", \"Horror\", \"Animated\" or \"Drama\")");
             name = input.nextLine();
 
-            for (int i = 0; i < list.size(); i++) {
-                if ((list.get(i).getCategory().equalsIgnoreCase(name))) {
-                    System.out.println(list.get(i).getTitle());
+            for (Movies aList : list) {
+                if ((aList.getCategory().equalsIgnoreCase(name))) {
+                    System.out.println(aList.getTitle());
                 }
             }
 
